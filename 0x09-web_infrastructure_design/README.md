@@ -37,9 +37,9 @@ Task # | Type | Short description | File name and link |
 3 | *Advanced* |  <p>Readme</p>    <ul>  <li><a href="https://www.nginx.com/resources/glossary/application-server-vs-web-server/">Application server vs web server</a></li>  </ul>    <p>Requirements:</p>    <ul>  <li> You must add:    <ul>  <li>1 server</li>  <li>1 load-balancer (HAproxy) configured as cluster with the other one</li>  <li>2 web application servers (Gunicorn)</li>  </ul></li>  <li>You must be able to explain some specifics about this infrastructure:    <ul>  <li>For every additional element, why you are adding it</li>  </ul></li>  </ul> | [3-scale_up](./scale_up)
 
 # You one must be able to explain about task 0
-* What is a server
-<h5>Servers are physical machines (as hardwares), virtual machines or softwares (computer programs) that serve or provide functionality to other programs or devices called “clients”. The term server comes from queuing theory used in Kendall’s notation, where servers serve or process the clients requirements in the same way as a telephone operator, a cooker or a production machine process incoming orders, having in mind its capacity and service process time.
+* ### What is a server
+<p>Servers are physical machines (as hardwares), virtual machines or softwares (computer programs) that serve or provide functionality to other programs or devices called “clients”. The term server comes from queuing theory used in Kendall’s notation, where servers serve or process the clients requirements in the same way as a telephone operator, a cooker or a production machine process incoming orders, having in mind its capacity and service process time.
 
 A computer can function as a server, and a server can be a computer, both of them being built up with hardware and software. However, the main difference between these two is the capacity and computer power servers have. In other words, servers are computers on steroids with faster processing capacity. They are usually stored in data centers racks (stacks of servers piled one on top of each other).
 
-On the other hand, virtual servers function more like virtual machines, or virtual computers. These are a virtual representation of the physical servers, having their own operating system and applications (Posey, 2021).</H5>
+On the other hand, virtual servers function more like virtual machines, or virtual computers. These are a virtual representation of the physical servers, having their own operating system and applications (Posey, 2021).</p>
