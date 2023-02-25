@@ -36,10 +36,75 @@ Task # | Type | Short description | File name and link |
 2 | **Mandatory** |<p>On a whiteboard, design a three servers web infrastructure that host the website <code>www.foobar.com</code>, it must be secured, serve encrypted traffic and be monitored.</p><p>Requirements:</p><ul><li> You must add:<ul><li>3 firewalls </li><li>1 SSL certificate to serve <code>www.foobar.com</code> over HTTPS</li><li>3 monitoring clients (data collector for Sumologic or other monitoring services)</li></ul></li><li>You must be able to explain some specifics about this infrastructure:<ul><li>For every additional element, why you are adding it</li><li>What are firewalls for</li><li>Why is the traffic served over HTTPS</li><li>What monitoring is used for</li><li>How is the monitoring tool collecting data</li><li>Explain what to do if you want to monitor your web server QPS</li></ul></li><li>You must be able to explain what are the issues with this infrastructure:<ul><li>Why terminating SSL at the load balancer level is an issue</li><li>Why having only one MySQL server capable of accepting writes is an issue</li></ul></li></ul> | [2-secured_and_monitored_web_infrastructure](./2-secured_and_monitored_web_infrastructure)
 3 | *Advanced* |  <p>Readme</p>    <ul>  <li><a href="https://www.nginx.com/resources/glossary/application-server-vs-web-server/">Application server vs web server</a></li>  </ul>    <p>Requirements:</p>    <ul>  <li> You must add:    <ul>  <li>1 server</li>  <li>1 load-balancer (HAproxy) configured as cluster with the other one</li>  <li>2 web application servers (Gunicorn)</li>  </ul></li>  <li>You must be able to explain some specifics about this infrastructure:    <ul>  <li>For every additional element, why you are adding it</li>  </ul></li>  </ul> | [3-scale_up](./scale_up)
 
-# You one must be able to explain about task 0
+# What one must be able to explain about task 0
 * ### What is a server
 <p>Servers are physical machines (as hardwares), virtual machines or softwares (computer programs) that serve or provide functionality to other programs or devices called “clients”. The term server comes from queuing theory used in Kendall’s notation, where servers serve or process the clients requirements in the same way as a telephone operator, a cooker or a production machine process incoming orders, having in mind its capacity and service process time.
 
 A computer can function as a server, and a server can be a computer, both of them being built up with hardware and software. However, the main difference between these two is the capacity and computer power servers have. In other words, servers are computers on steroids with faster processing capacity. They are usually stored in data centers racks (stacks of servers piled one on top of each other).
 
 On the other hand, virtual servers function more like virtual machines, or virtual computers. These are a virtual representation of the physical servers, having their own operating system and applications (Posey, 2021).</p>
+
+* ### What is the role of the domain name
+<p>The role of the domain name is to replace complex IP addresses numbers into easily understandable names so humans can remember and communicate them in a better way.</p>
+
+* ### What type of DNS record www is in www.foobar.com
+<p> DNS record of www belongs to a subdomain of the www.foobar.com. It is an A record type of DNS</p>
+
+* ### What is the role of the web server
+</p> Web servers are what make Web hosting possible, that is, the possibility of renting a space on a server to store the files of our site.</p>
+
+* ### The fundamental role of a Web Server
+<p>The main function of a Web server is to store the files of a site and broadcast them over the Internet so that they can be visited by users. Basically, a web server is a large computer that stores and transmits data via the network system called the Internet. When a user enters an Internet page, his browser communicates with the server sending and receiving data that determines what he sees on the screen. Therefore, we say that Web servers are to store and transmit data from a site as requested by a visitor’s browser.</p>
+
+* ### What is the role of the application server
+<p>The application server is the intermediary between browser-based databases and back-end databases and legacy systems. In many uses, the application server combines or works with a web server (Hypertext Transfer Protocol) and is called a web application server.
+
+What is the role of the database
+The role of the database is to make the information gathered organized so it can be easily accessed, managed and updated. However, not all database management systems work the same, and the mechanisms they use to organize data can vary, ranging from relational database to object-oriented database, distributed database or cloud database.</p>
+
+* ### What is the server using to communicate with the computer of the user requesting the website
+<p> The server is using HTTP to communicate with the computer.</p>
+
+* ### Issues with the simple web infrastructure
+<p>One of the issues of having a simple web infrastructure, has to do with the SPOF (Single Point of Failure) where if component of the system fails, there is no backup that can support the continuity of the functionality of the system, bringing the whole system to a collapse by being unable to operate.</p>
+<p>Also, whenever some structure or node in the system needs to be repaired, the whole system has to be shut down, while the maintenance is done. Then, client requests cannot be attended during this period of time.</p>
+<p>Overload of traffic can be a risk to the server capacity. This, because there is no possibility to scale the service with additional servers as backup. Leading to a possible breakdown of the web page and client requests, as traffic surpasess servers capacity.</p>
+
+# What one must be able to explain about task 1
+
+* ### For additional element, why you are adding it?
+<p>The new configuration is composed of two master-servers and one slave-servers. As the master-servers are going to be working based on a Active-Active set up, their configuration must be identical, therefore we need to add every additional element as the simple web infrastructure we had in the previous point. The load is going to be managed through a load-balancer, which distributes the queries according to a Robin-Round algorithm. Finally an additional server will be needed to serve a replica or slave server, helping to unload the masters servers reading queries.</p> 
+
+* ### What distribution algorithm your load balancer is configured with and how it works
+<p> The load balancer is using Round RObin algorithm.</p>
+
+* ### Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both
+<p> The load balancer is using the two i.e both active-active and active-passive</p>
+
+# What one must be able to explain about task 2
+
+* ### For every additional element, why you are adding it
+<p>3 Firewalls: The first Firewall checks the rules after receiving the requests and could deny following requests. The second firewall is working in the server to prevent someone hacking depending of the requests, and the third firewall acts as a circuit-level firewalls, inspect the transaction of the information.</p>
+</p>SSL certificate: 1 SSL certificate: is added to secure https protocols and encrypt communication. Then, the ‘plain text’ won’t be easy accessed or viewed by a third person, making the protocol communication and data transfer form the browser and web server more secure (Instant SSL, 2021)</p>
+
+* ### What are firewalls for
+<P>Firewalls is a network security device that monitors network traffic, it can be understood as a division or “wall” between a private network and public network which limits and blocks network traffic based on a set of security rules in the hardware or software by analyzing data packets that request entry to the network. Additionally, firewalls are used to allow remote access to a private network through secure authentication (Beal, 1996)</P>
+
+* ### Why is the traffic served over HTTPS
+<P>HTTPS stands for HyperText Transfer Protocol Secure, and the traffic is served in order to bring protection by using the secure port 443, which encrypts outgoing information. Then it is more difficult to spy or get access to the site’s information.</P>
+
+* ### What monitoring is used for
+<P>Monitoring is practice used for quality control. As Peter Ducker said, “What can’t be measured, it can’t be improved”. Then, monitoring not only helps to make sure to maintain high quality levels, keeping the established standards and consistency, but also to help in the continuous improvement of the resources performance.</P>
+
+* ### How the monitoring tool is collecting data
+<p>IT monitoring is composed of three parts: 1) Fundation; 2) Software, and 3) Interpretation in order to function.
+
+Foundation: Are related to the infrastructure at its lowest layer of the software stack. This includes physical and virtual devices, such as servers, CPUs and VMs.
+Software: The software is the monitoring section which analyzes what is happening in the devices (physical or virtual machines) in terms of CPU usage, load, memory, and running count.
+Interpretation: Here is where collected data is turned into metrics and are presented through graphs or data charts (mostly on GUI dashboard). This is often integrated with tools of data visualization to help better understand and do data analytics of performance (Gillis, 2020).</p>
+
+* ### Explain what to do if you want to monitor your web server QPS
+<p>Queries per second is a measure of the rate of traffic going in a particular server serving a Web domain. It is an important metric to monitor, because it can help you decide whether to scale the server in order to cope with the demand of usage, and resource requirement so the web page won’t collapse in the future with overload server request.</p>
+
+
+
