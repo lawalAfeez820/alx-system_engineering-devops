@@ -124,12 +124,12 @@ I love Puppetroot@6712bef7a528:~#
 
 mandatory
 
-Using Puppet, install `puppet-lint`.
+Using Puppet, install `flask` from pip3
 
 Requirements:
 
--   Install `puppet-lint`
--   Version must be `2.5.0`
+-   Install `flask`
+-   Version must be `2.1.0`
 
 Example:
 
