@@ -1,7 +1,7 @@
 ```diff
 
 + Updated and Done
-+ Author: Mahadi Abuhuraira
++ Author: Lawal Afeez
 
 ```
 ## Tasks
