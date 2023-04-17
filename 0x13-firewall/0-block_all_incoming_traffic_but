@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Allow incoming traffic on port 22 for SSH
+sudo ufw allow 22/tcp
+
+# Install ufw
+sudo apt-get update
+sudo apt-get install ufw
+
+# Configure ufw rules to allow incoming traffic on TCP ports 443 and 80
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+
+# Set the default incoming traffic to be denied
+sudo ufw default deny incoming
+
+# Enable ufw
+sudo ufw enable
+
+# Check ufw status to ensure the rules are applied correctly
+sudo ufw status
